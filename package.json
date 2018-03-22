@@ -1,0 +1,34 @@
+{
+  "name": "generator-aranja-oss",
+  "version": "0.0.0",
+  "description": "A yo generator for Aranja's OSS projects",
+  "homepage": "https://github.com/aranja/generator-aranja-oss",
+  "author": {
+    "name": "Aranja",
+    "email": "aranja@aranja.com",
+    "url": "https://aranja.com"
+  },
+  "files": ["generators"],
+  "main": "generators/index.js",
+  "keywords": ["open source", "aranja", "yeoman-generator", "babel", "js"],
+  "scripts": {
+    "lint": "kcd-scripts lint",
+    "validate": "kcd-scripts validate",
+    "precommit": "kcd-scripts precommit"
+  },
+  "dependencies": {
+    "lodash.kebabcase": "^4.1.1",
+    "npm-check": "^5.5.2",
+    "yeoman-generator": "^2.0.3"
+  },
+  "devDependencies": {
+    "kcd-scripts": "^0.36.1"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js"
+  },
+  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "preferGlobal": true,
+  "repository": "aranja/generator-aranja-oss",
+  "license": "MIT"
+}

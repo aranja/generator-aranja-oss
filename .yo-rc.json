@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Aranja",
+      "authorEmail": "aranja@aranja.com",
+      "authorUrl": "https://aranja.com"
+    }
+  }
+}
