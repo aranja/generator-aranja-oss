@@ -2,13 +2,15 @@
   "name": "<%= moduleName %>",
   "version": "0.0.0-semantically-released",
   "description": "<%= description %>",
-  "main": "dist/index.js",
+  "main": "dist/<%= moduleName %>.cjs.js",
+  "jsnext:main": "dist/<%= moduleName %>.esm.js",
+  "module": "dist/<%= moduleName %>.esm.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
   },
   "scripts": {
-    "build": "kcd-scripts build",
+    "build": "kcd-scripts build --bundle",
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "test:update": "npm test -- --updateSnapshot --coverage",
@@ -16,8 +18,8 @@
     "setup": "npm install && npm run validate -s",
     "precommit": "kcd-scripts precommit"
   },
-  "files": ["dist"],
   "keywords": [],
+  "files": ["dist"],
   "author": {
     "name": "Aranja",
     "email": "aranja@aranja.com",
