@@ -17,6 +17,18 @@ module.exports = class extends Generator {
         type: 'confirm',
       },
       {
+        name: 'framework',
+        message: 'What framework do you want to use?',
+        type: 'list',
+        choices({moduleName}) {
+          const choices = ['React', 'None']
+          return /react/g.test(moduleName) ? choices : choices.reverse()
+        },
+        when({devDep}) {
+          return devDep === false
+        },
+      },
+      {
         name: 'description',
         message: `What's the project description?`,
         type: 'input',
@@ -26,11 +38,22 @@ module.exports = class extends Generator {
         this.fs.move(this.destinationPath(from), this.destinationPath(to))
       }
 
-      this.fs.copyTpl(
-        [`${this.templatePath()}/**`],
-        this.destinationPath(),
-        props,
-      )
+      const templatePath = this.templatePath()
+      const reactSpecific = [
+        `/storybook/**`,
+        `/jest.config.js`,
+        `/tests.setup.js`,
+      ]
+      const files = [`${templatePath}/**`]
+
+      if (props.framework !== 'React') {
+        files.push(...reactSpecific.map(path => `!**${path}`))
+      }
+
+      this.fs.copyTpl(files, this.destinationPath(), {
+        ...props,
+        framework: props.framework || 'None',
+      })
 
       mv('gitattributes', '.gitattributes')
       mv('gitignore', '.gitignore')

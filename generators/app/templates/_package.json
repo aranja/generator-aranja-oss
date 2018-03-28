@@ -2,22 +2,27 @@
   "name": "<%= moduleName %>",
   "version": "0.0.0-semantically-released",
   "description": "<%= description %>",
-  "main": "dist/index.js",
+  "main": "dist/<%= moduleName %>.cjs.js",
+  "jsnext:main": "dist/<%= moduleName %>.esm.js",
+  "module": "dist/<%= moduleName %>.esm.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
   },
   "scripts": {
-    "build": "kcd-scripts build",
+    "build": "kcd-scripts build --bundle",
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "test:update": "npm test -- --updateSnapshot --coverage",
     "validate": "kcd-scripts validate",
     "setup": "npm install && npm run validate -s",
-    "precommit": "kcd-scripts precommit"
+    "precommit": "kcd-scripts precommit"<% if (framework === 'React') { %>,
+    "storybook": "start-storybook -p 6006 -c storybook",
+    "build-storybook": "build-storybook -o docs"
+    <% } %>
   },
-  "files": ["dist"],
   "keywords": [],
+  "files": ["dist"],
   "author": {
     "name": "Aranja",
     "email": "aranja@aranja.com",
@@ -25,7 +30,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "kcd-scripts": "^0.36.1"
+    "kcd-scripts": "^0.36.1"<% if (framework === 'React') { %>,
+    "@storybook/react": "^3.3.15",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+    <% } %>
   },
   "eslintIgnore": ["node_modules", "coverage", "dist"],
   "repository": {
